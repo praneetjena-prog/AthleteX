@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -108,7 +109,13 @@ def database_url():
 
 @st.cache_resource
 def connection(url):
-    conn = psycopg2.connect(url, connect_timeout=10)
+    cert_path = str((Path(__file__).parent / "certs" / "root.crt").resolve())
+    conn = psycopg2.connect(
+        url,
+        sslrootcert=cert_path,
+        sslmode="verify-full",
+        connect_timeout=10,
+    )
     conn.autocommit = True
     return conn
 
