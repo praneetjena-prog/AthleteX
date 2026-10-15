@@ -105,7 +105,30 @@ def database_url():
         secret = st.secrets.get("DATABASE_URL", "")
     except Exception:
         secret = ""
-    return secret or os.getenv("DATABASE_URL", "")
+    raw = secret or os.getenv("DATABASE_URL", "")
+    if isinstance(raw, str) and raw.strip():
+        raw = raw.strip()
+        # Strip any accidental whitespace around the user/password and host boundary
+        # (e.g. 'password @host' -> 'password@host' which causes Linux libpq to include the space in the password)
+        if "@" in raw:
+            user_part, host_part = raw.split("@", 1)
+            raw = f"{user_part.rstrip()}@{host_part.lstrip()}"
+        return raw
+
+    # Optional fallback to individual keys if configured in secrets
+    try:
+        cfg = st.secrets.get("connections", {}).get("cockroach", {}) or st.secrets.get("postgres", {})
+        if cfg:
+            user = cfg.get("username") or cfg.get("user", "")
+            pwd = cfg.get("password", "")
+            host = cfg.get("host", "")
+            port = cfg.get("port", 26257)
+            dbname = cfg.get("database") or cfg.get("dbname", "athletex")
+            return f"postgresql://{user}:{pwd}@{host}:{port}/{dbname}?sslmode=verify-full"
+    except Exception:
+        pass
+
+    return ""
 
 @st.cache_resource
 def connection(url):
