@@ -13,88 +13,204 @@ st.markdown("""
 <style>
 :root {
     --ax-ink: #183247;
-    --ax-muted: #667b8c;
+    --ax-muted: #5a6e82;
     --ax-teal: #087f8c;
     --ax-teal-soft: #e6f6f5;
     --ax-border: #dce6ed;
     --ax-canvas: #f5f8fb;
+    --ax-card: #ffffff;
 }
+
+/* 1. Eliminate unwanted top header toolbar & tight padding */
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    z-index: 99 !important;
+}
+
+[data-testid="stToolbar"] {
+    visibility: hidden !important;
+    height: 0 !important;
+    display: none !important;
+}
+
+[data-testid="stSidebarCollapsedControl"] {
+    background: #ffffff !important;
+    border: 1px solid #dce6ed !important;
+    border-radius: 8px !important;
+    color: #183247 !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
+    margin-top: 0.5rem !important;
+    margin-left: 0.5rem !important;
+    z-index: 100 !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
 .stApp {
-    background: #f5f8fb;
-    color: var(--ax-ink);
+    background: #f5f8fb !important;
+    color: #183247;
 }
+
 .block-container {
-    padding-top: 1.35rem;
+    padding-top: 1rem !important;
     padding-bottom: 2.25rem;
     max-width: 1500px;
 }
-h1, h2, h3 {
-    color: #183247;
+
+/* 2. Standardized Light Typography & Headers */
+h1, h2, h3, h4, h5, h6 {
+    color: #183247 !important;
     letter-spacing: -0.02em;
 }
 h1 { font-weight: 750; }
 h2, h3 { font-weight: 650; }
-[data-testid="stSidebar"] {
-    background: #ffffff;
-    border-right: 1px solid #e0e8ee;
-}
-[data-testid="stSidebar"] * {
+h4 { font-weight: 600; }
+
+p, span, div {
     color: #183247;
 }
-[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
-    color: #718596;
+
+/* Captions and secondary muted text */
+[data-testid="stCaptionContainer"] p,
+[data-testid="stCaptionContainer"],
+.stCaption,
+.ax-subtle {
+    color: #5a6e82 !important;
+    font-size: 13px;
+}
+
+/* 3. Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    border-right: 1px solid #e0e8ee !important;
+}
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: #183247 !important;
 }
 [data-testid="stSidebar"] [data-testid="stRadio"] label {
     padding: .42rem .55rem;
     border-radius: 9px;
 }
+[data-testid="stSidebar"] [data-testid="stRadio"] label p,
+[data-testid="stSidebar"] [data-testid="stRadio"] label span {
+    color: #183247 !important;
+    font-weight: 500;
+}
 [data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
-    background: #eef7f8;
+    background: #eef7f8 !important;
 }
+
+/* 4. KPI Metric Cards */
 [data-testid="stMetric"] {
-    background: #ffffff;
-    border: 1px solid #dce6ed;
-    border-radius: 13px;
-    padding: 14px 16px;
-    box-shadow: 0 3px 12px rgba(24,50,71,.04);
+    background: #ffffff !important;
+    border: 1px solid #dce6ed !important;
+    border-radius: 13px !important;
+    padding: 14px 16px !important;
+    box-shadow: 0 3px 12px rgba(24,50,71,.04) !important;
 }
-[data-testid="stMetricLabel"] {
-    color: #667b8c;
-    font-weight: 600;
+[data-testid="stMetricLabel"],
+[data-testid="stMetricLabel"] p,
+[data-testid="stMetricLabel"] span {
+    color: #5a6e82 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
 }
-[data-testid="stMetricValue"] {
-    color: #183247;
-    font-weight: 750;
+[data-testid="stMetricValue"],
+[data-testid="stMetricValue"] div {
+    color: #183247 !important;
+    font-weight: 750 !important;
 }
+
+/* 5. Dataframes & Tables */
 div[data-testid="stDataFrame"], div[data-testid="stTable"] {
-    border: 1px solid #dce6ed;
-    border-radius: 10px;
-    overflow: hidden;
+    background-color: #ffffff !important;
+    border: 1px solid #dce6ed !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
 }
+
+/* 6. Tabs */
+button[data-baseweb="tab"] {
+    color: #5a6e82 !important;
+    font-weight: 600 !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #087f8c !important;
+    border-bottom-color: #087f8c !important;
+}
+
+/* 7. Buttons */
 .stButton > button {
-    border-radius: 9px;
-    border: 1px solid #cbd9e3;
-    font-weight: 600;
-    background: #ffffff;
-    color: #183247;
+    border-radius: 9px !important;
+    border: 1px solid #cbd9e3 !important;
+    font-weight: 600 !important;
+    background: #ffffff !important;
+    color: #183247 !important;
+}
+.stButton > button:hover {
+    border-color: #087f8c !important;
+    color: #087f8c !important;
 }
 .stButton > button[kind="primary"] {
-    background: #087f8c;
-    border-color: #087f8c;
-    color: #ffffff;
+    background: #087f8c !important;
+    border-color: #087f8c !important;
+    color: #ffffff !important;
 }
-hr { border-color: #dce6ed; }
-.ax-status { display:inline-block; padding:5px 10px; border-radius:999px; background:#e6f6f0; color:#116149; border:1px solid #b8e3d3; font-size:12px; font-weight:700; }
-.ax-alert { padding:14px 16px; border-radius:12px; background:#fff7ed; border:1px solid #fed7aa; color:#9a3412; margin:8px 0 16px 0; }
-.ax-subtle { color:#667b8c; font-size:13px; }
 
+/* 8. Status & Alert Badges */
+hr { border-color: #dce6ed !important; }
+.ax-status {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #e6f6f0;
+    color: #0f5132;
+    border: 1px solid #badbcc;
+    font-size: 12px;
+    font-weight: 700;
+}
+.ax-alert {
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    margin: 8px 0 16px 0;
+}
 </style>
 """, unsafe_allow_html=True)
 px.defaults.template = "plotly_white"
 px.defaults.color_discrete_sequence = ["#087f8c","#4776a8","#d99a2b","#d96b62","#7b72b2"]
 
 def compact_fig(fig, height=320, top=42):
-    fig.update_layout(height=height, margin=dict(l=24, r=18, t=top, b=28), font=dict(size=12))
+    fig.update_layout(
+        height=height,
+        margin=dict(l=24, r=18, t=top, b=28),
+        font=dict(size=12, color="#183247", family="sans-serif"),
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#ffffff",
+        hoverlabel=dict(bgcolor="#ffffff", font_size=12, font_color="#183247", bordercolor="#dce6ed"),
+    )
+    fig.update_xaxes(
+        gridcolor="#edf2f7",
+        zerolinecolor="#dce6ed",
+        tickfont=dict(color="#5a6e82", size=11),
+        title_font=dict(color="#183247", size=12),
+    )
+    fig.update_yaxes(
+        gridcolor="#edf2f7",
+        zerolinecolor="#dce6ed",
+        tickfont=dict(color="#5a6e82", size=11),
+        title_font=dict(color="#183247", size=12),
+    )
     return fig
 
 def friendly_columns(df, mapping):
@@ -211,9 +327,19 @@ if page == "Overview":
         df["Podium"] = df.apply(lambda r: f"🥇 {int(r['gold_medals'] or 0)}  ·  🥈 {int(r['silver_medals'] or 0)}  ·  🥉 {int(r['bronze_medals'] or 0)}", axis=1)
         df["Athlete"] = df["full_name"].map(lambda x: f"🏃 {x}")
         leaderboard = df[["Athlete", "competitions", "Podium", "avg_competition_score", "best_evaluation_score"]].rename(columns={"competitions":"Competitions", "avg_competition_score":"Avg. score", "best_evaluation_score":"Best evaluation"})
-        st.dataframe(leaderboard, use_container_width=True, hide_index=True, height=360,
-            column_config={"Avg. score": st.column_config.ProgressColumn("Avg. score", min_value=0, max_value=100, format="%.1f"),
-                           "Best evaluation": st.column_config.NumberColumn("Best evaluation", format="⭐ %.2f")})
+        st.dataframe(
+            leaderboard,
+            use_container_width=True,
+            hide_index=True,
+            height=360,
+            column_config={
+                "Athlete": st.column_config.TextColumn("Athlete", width="medium"),
+                "Competitions": st.column_config.NumberColumn("Competitions", width="small", format="%d"),
+                "Podium": st.column_config.TextColumn("Podium", width="medium"),
+                "Avg. score": st.column_config.ProgressColumn("Avg. score", min_value=0, max_value=100, format="%.1f", width="medium"),
+                "Best evaluation": st.column_config.NumberColumn("Best eval", format="⭐ %.2f", width="small"),
+            },
+        )
     with right:
         st.markdown("#### Medal distribution")
         medals = query("""
@@ -229,12 +355,33 @@ if page == "Overview":
             if long.empty:
                 st.info("No medals have been recorded yet.")
             else:
-                fig = px.pie(long, names="Medal", values="Count", hole=0.60,
-                    color="Medal", color_discrete_map={"Gold":"#d99a2b", "Silver":"#8fa1b0", "Bronze":"#b36b39"})
-                fig.update_traces(textinfo="percent", hovertemplate="%{label}<br>Medals: %{value}<br>Share: %{percent}<extra></extra>")
-                fig.update_layout(legend_title=None, legend=dict(orientation="h", yanchor="bottom", y=-0.12, xanchor="center", x=0.5))
+                fig = px.pie(
+                    long,
+                    names="Medal",
+                    values="Count",
+                    hole=0.60,
+                    color="Medal",
+                    color_discrete_map={"Gold": "#D99A2B", "Silver": "#8FA1B0", "Bronze": "#B36B39"},
+                )
+                fig.update_traces(
+                    textinfo="percent",
+                    textfont=dict(color="#ffffff", size=12),
+                    marker=dict(line=dict(color="#ffffff", width=2)),
+                    hovertemplate="<b>%{label}</b><br>Medals: %{value}<br>Share: %{percent}<extra></extra>",
+                )
+                fig.update_layout(
+                    legend_title=None,
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=-0.12,
+                        xanchor="center",
+                        x=0.5,
+                        font=dict(color="#183247", size=12),
+                    ),
+                )
                 compact_fig(fig, height=340, top=18)
-                st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False})
+                st.plotly_chart(fig, use_container_width=True, theme=None, config={"displaylogo": False})
     st.caption(f"Database server time: {status.iloc[0]['server_time']}")
 
 elif page == "Athletes":
@@ -256,7 +403,21 @@ elif page == "Athletes":
         if term:
             athletes = athletes[athletes["full_name"].str.contains(term, case=False, na=False)]
         athlete_display = friendly_columns(athletes, {"full_name":"Athlete","competitions":"Competitions","gold_medals":"Gold","silver_medals":"Silver","bronze_medals":"Bronze","avg_competition_score":"Avg. score","best_evaluation_score":"Best evaluation"}).drop(columns=["athlete_id"], errors="ignore")
-        st.dataframe(athlete_display, use_container_width=True, hide_index=True, height=340)
+        st.dataframe(
+            athlete_display,
+            use_container_width=True,
+            hide_index=True,
+            height=340,
+            column_config={
+                "Athlete": st.column_config.TextColumn("Athlete", width="medium"),
+                "Competitions": st.column_config.NumberColumn("Competitions", format="%d"),
+                "Gold": st.column_config.NumberColumn("Gold", format="%d"),
+                "Silver": st.column_config.NumberColumn("Silver", format="%d"),
+                "Bronze": st.column_config.NumberColumn("Bronze", format="%d"),
+                "Avg. score": st.column_config.NumberColumn("Avg. score", format="%.2f"),
+                "Best evaluation": st.column_config.NumberColumn("Best eval", format="⭐ %.2f"),
+            },
+        )
 
     with biometrics_tab:
         athlete_choices = query("SELECT athlete_id, full_name FROM athletex.public.athlete ORDER BY full_name")
@@ -280,14 +441,39 @@ elif page == "Athletes":
                 k4.metric("Readings shown", f"{len(readings):,}")
                 fig = make_subplots(rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.12, subplot_titles=("Heart rate · BPM", "Speed · km/h and training intensity · /10"))
                 fig.add_trace(go.Scatter(x=readings["recorded_at"], y=readings["heart_rate"], name="Heart rate (BPM)", mode="lines+markers", line=dict(color="#087f8c", width=2)), row=1, col=1)
-                fig.add_hline(y=160, line_dash="dash", line_color="#dc2626", annotation_text="160 BPM review threshold", annotation_position="top left", row=1, col=1)
+                max_hr = float(readings["heart_rate"].max()) if readings["heart_rate"].notna().any() else 180.0
+                upper_bound = max(max_hr + 10.0, 190.0)
+                fig.add_hrect(
+                    y0=160,
+                    y1=upper_bound,
+                    fillcolor="rgba(220, 38, 38, 0.08)",
+                    line_width=0,
+                    annotation_text="Review threshold (≥160 BPM)",
+                    annotation_position="top left",
+                    annotation_font=dict(color="#dc2626", size=11),
+                    row=1,
+                    col=1,
+                )
+                fig.add_hline(y=160, line_dash="dash", line_color="#dc2626", line_width=1.5, row=1, col=1)
                 fig.add_trace(go.Scatter(x=readings["recorded_at"], y=readings["speed_kmh"], name="Speed (km/h)", mode="lines", line=dict(color="#4776a8", width=2)), row=2, col=1)
                 fig.add_trace(go.Scatter(x=readings["recorded_at"], y=readings["training_intensity"], name="Intensity (/10)", mode="lines", line=dict(color="#d99a2b", width=2, dash="dot")), row=2, col=1)
-                fig.update_layout(hovermode="x unified", legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), height=520, margin=dict(l=20,r=20,t=65,b=25), font=dict(size=12))
-                fig.update_xaxes(title_text="Recorded at", row=2, col=1)
-                fig.update_yaxes(title_text="BPM", row=1, col=1)
-                fig.update_yaxes(title_text="Value", row=2, col=1)
-                st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False})
+                fig.update_layout(
+                    hovermode="x unified",
+                    legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(color="#183247", size=11)),
+                    height=520,
+                    margin=dict(l=20, r=20, t=65, b=25),
+                    font=dict(size=12, color="#183247"),
+                    paper_bgcolor="#ffffff",
+                    plot_bgcolor="#ffffff",
+                    hoverlabel=dict(bgcolor="#ffffff", font_size=12, font_color="#183247", bordercolor="#dce6ed"),
+                )
+                for annotation in fig["layout"]["annotations"]:
+                    annotation["font"] = dict(color="#183247", size=13)
+                fig.update_xaxes(title_text="Recorded at", gridcolor="#edf2f7", zerolinecolor="#dce6ed", tickfont=dict(color="#5a6e82"), title_font=dict(color="#183247"), row=2, col=1)
+                fig.update_xaxes(gridcolor="#edf2f7", zerolinecolor="#dce6ed", tickfont=dict(color="#5a6e82"), row=1, col=1)
+                fig.update_yaxes(title_text="BPM", gridcolor="#edf2f7", zerolinecolor="#dce6ed", tickfont=dict(color="#5a6e82"), title_font=dict(color="#183247"), row=1, col=1)
+                fig.update_yaxes(title_text="Value", gridcolor="#edf2f7", zerolinecolor="#dce6ed", tickfont=dict(color="#5a6e82"), title_font=dict(color="#183247"), row=2, col=1)
+                st.plotly_chart(fig, use_container_width=True, theme=None, config={"displaylogo": False})
             else:
                 st.info("No telemetry readings are linked to this athlete.")
         else:
@@ -320,8 +506,20 @@ elif page == "Training":
     k4.metric("Avg. session time", f"{avg_session:.0f} min")
     st.markdown("#### Athlete workload")
     training_display = friendly_columns(df, {"full_name":"Athlete","total_sessions":"Sessions","total_minutes":"Training minutes","total_hours":"Training hours","total_calories":"Calories burned","avg_session_minutes":"Avg. session (min)"})
-    st.dataframe(training_display, use_container_width=True, hide_index=True, height=300,
-        column_config={"Training hours": st.column_config.NumberColumn(format="%.1f"), "Calories burned": st.column_config.NumberColumn(format="%d kcal"), "Avg. session (min)": st.column_config.NumberColumn(format="%.1f min")})
+    st.dataframe(
+        training_display,
+        use_container_width=True,
+        hide_index=True,
+        height=300,
+        column_config={
+            "Athlete": st.column_config.TextColumn("Athlete", width="medium"),
+            "Sessions": st.column_config.NumberColumn(format="%d"),
+            "Training minutes": st.column_config.NumberColumn(format="%d min"),
+            "Training hours": st.column_config.NumberColumn(format="%.1f"),
+            "Calories burned": st.column_config.NumberColumn(format="%d kcal"),
+            "Avg. session (min)": st.column_config.NumberColumn(format="%.1f min"),
+        },
+    )
     if not df.empty:
         sort_by = st.radio("Rank workload by", options=["Training minutes", "Calories burned"], horizontal=True)
         metric_col = "total_minutes" if sort_by == "Training minutes" else "total_calories"
@@ -330,7 +528,7 @@ elif page == "Training":
         fig.update_traces(marker_color="#087f8c", hovertemplate="%{y}<br>%{x:,.0f}<extra></extra>")
         fig.update_layout(yaxis_title=None, xaxis_title=sort_by)
         compact_fig(fig, height=360, top=42)
-        st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False})
+        st.plotly_chart(fig, use_container_width=True, theme=None, config={"displaylogo": False})
 
 elif page == "Telemetry":
     st.subheader("Telemetry & review center")
@@ -352,17 +550,33 @@ elif page == "Telemetry":
             c1, c2 = st.columns(2)
             with c1:
                 fig_hr = px.line(daily, x="reading_day", y="avg_heart_rate", markers=True, title="Average heart rate by day", labels={"reading_day":"Date","avg_heart_rate":"Avg. heart rate (bpm)"})
+                fig_hr.update_traces(line=dict(color="#087f8c", width=2.5), marker=dict(color="#087f8c", size=6))
                 fig_hr.update_yaxes(title=None)
                 compact_fig(fig_hr, height=300, top=48)
-                st.plotly_chart(fig_hr, use_container_width=True, config={"displaylogo": False})
+                st.plotly_chart(fig_hr, use_container_width=True, theme=None, config={"displaylogo": False})
             with c2:
                 fig_intensity = px.line(daily, x="reading_day", y="avg_training_intensity", markers=True, title="Average training intensity by day", labels={"reading_day":"Date","avg_training_intensity":"Avg. intensity"})
+                fig_intensity.update_traces(line=dict(color="#d99a2b", width=2.5), marker=dict(color="#d99a2b", size=6))
                 fig_intensity.update_yaxes(title=None)
                 compact_fig(fig_intensity, height=300, top=48)
-                st.plotly_chart(fig_intensity, use_container_width=True, config={"displaylogo": False})
+                st.plotly_chart(fig_intensity, use_container_width=True, theme=None, config={"displaylogo": False})
             st.markdown("#### Daily data")
             daily_display = friendly_columns(daily, {"reading_day":"Date","total_readings":"Readings","avg_heart_rate":"Avg. heart rate (bpm)","min_heart_rate":"Min heart rate","max_heart_rate":"Max heart rate","avg_training_intensity":"Avg. intensity","avg_speed_kmh":"Avg. speed (km/h)"})
-            st.dataframe(daily_display, use_container_width=True, hide_index=True, height=300)
+            st.dataframe(
+                daily_display,
+                use_container_width=True,
+                hide_index=True,
+                height=300,
+                column_config={
+                    "Date": st.column_config.DateColumn("Date", format="YYYY-MM-DD"),
+                    "Readings": st.column_config.NumberColumn(format="%d"),
+                    "Avg. heart rate (bpm)": st.column_config.NumberColumn(format="%.1f BPM"),
+                    "Min heart rate": st.column_config.NumberColumn(format="%.0f BPM"),
+                    "Max heart rate": st.column_config.NumberColumn(format="%.0f BPM"),
+                    "Avg. intensity": st.column_config.NumberColumn(format="%.1f/10"),
+                    "Avg. speed (km/h)": st.column_config.NumberColumn(format="%.1f km/h"),
+                },
+            )
 
     with alert_tab:
         st.markdown("#### Threshold-based review flags")
@@ -386,8 +600,20 @@ elif page == "Telemetry":
             for col in ["avg_heart_rate", "avg_intensity", "max_heart_rate"]:
                 alerts[col] = pd.to_numeric(alerts[col], errors="coerce")
             alerts_display = friendly_columns(alerts, {"full_name":"Athlete","flagged_readings":"Flagged readings","avg_heart_rate":"Avg. heart rate (bpm)","avg_intensity":"Avg. intensity","max_heart_rate":"Max heart rate (bpm)"})
-            st.dataframe(alerts_display, use_container_width=True, hide_index=True, height=300,
-                column_config={"Priority": st.column_config.TextColumn("Priority"), "Avg. heart rate (bpm)": st.column_config.NumberColumn(format="%.1f BPM"), "Avg. intensity": st.column_config.NumberColumn(format="%.1f/10"), "Max heart rate (bpm)": st.column_config.NumberColumn(format="%.0f BPM")})
+            st.dataframe(
+                alerts_display,
+                use_container_width=True,
+                hide_index=True,
+                height=300,
+                column_config={
+                    "Priority": st.column_config.TextColumn("Priority"),
+                    "Athlete": st.column_config.TextColumn("Athlete", width="medium"),
+                    "Flagged readings": st.column_config.NumberColumn(format="%d"),
+                    "Avg. heart rate (bpm)": st.column_config.NumberColumn(format="%.1f BPM"),
+                    "Avg. intensity": st.column_config.NumberColumn(format="%.1f/10"),
+                    "Max heart rate (bpm)": st.column_config.NumberColumn(format="%.0f BPM"),
+                },
+            )
         else:
             st.success("No athletes currently meet the configured review rule.")
         st.caption("Rule-based review of synthetic demonstration data only. This is not a medical diagnosis or clinically validated risk score.")
@@ -431,15 +657,42 @@ elif page == "Competitions":
     k3.metric("Medals distributed", f"{total_medals:,}")
     k4.metric("Leading sport", leading_sport)
     competition_display = friendly_columns(df, {"sport_name":"Sport","registered_athletes":"Registered athletes","total_competitions":"Competitions","gold_medals":"Gold","silver_medals":"Silver","bronze_medals":"Bronze","avg_competition_score":"Avg. score"})
-    st.dataframe(competition_display, use_container_width=True, hide_index=True, height=280,
-        column_config={"Avg. score": st.column_config.NumberColumn(format="%.2f")})
+    st.dataframe(
+        competition_display,
+        use_container_width=True,
+        hide_index=True,
+        height=280,
+        column_config={
+            "Sport": st.column_config.TextColumn("Sport", width="medium"),
+            "Registered athletes": st.column_config.NumberColumn(format="%d"),
+            "Competitions": st.column_config.NumberColumn(format="%d"),
+            "Gold": st.column_config.NumberColumn(format="%d"),
+            "Silver": st.column_config.NumberColumn(format="%d"),
+            "Bronze": st.column_config.NumberColumn(format="%d"),
+            "Avg. score": st.column_config.NumberColumn(format="%.2f"),
+        },
+    )
     if not df.empty:
         long = df.melt(id_vars="sport_name", value_vars=["gold_medals", "silver_medals", "bronze_medals"], var_name="Medal", value_name="Count")
         long["Medal"] = long["Medal"].str.replace("_medals", "", regex=False).str.title()
-        fig = px.bar(long, x="sport_name", y="Count", color="Medal", barmode="group", title="Podium distribution by sport", labels={"sport_name":"Sport","Count":"Medals"}, color_discrete_map={"Gold":"#d99a2b", "Silver":"#8fa1b0", "Bronze":"#b36b39"})
-        fig.update_layout(xaxis_title=None, yaxis_title="Medals", legend_title=None, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1))
+        fig = px.bar(
+            long,
+            x="sport_name",
+            y="Count",
+            color="Medal",
+            barmode="group",
+            title="Podium distribution by sport",
+            labels={"sport_name": "Sport", "Count": "Medals"},
+            color_discrete_map={"Gold": "#D99A2B", "Silver": "#8FA1B0", "Bronze": "#B36B39"},
+        )
+        fig.update_layout(
+            xaxis_title=None,
+            yaxis_title="Medals",
+            legend_title=None,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1, font=dict(color="#183247", size=11)),
+        )
         compact_fig(fig, height=360, top=48)
-        st.plotly_chart(fig, use_container_width=True, config={"displaylogo": False})
+        st.plotly_chart(fig, use_container_width=True, theme=None, config={"displaylogo": False})
 
 st.divider()
 st.caption("AthleteX • Academic prototype • Synthetic telemetry data")
