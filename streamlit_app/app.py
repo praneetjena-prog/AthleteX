@@ -8,7 +8,12 @@ import streamlit as st
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-st.set_page_config(page_title="AthleteX | Sports Performance", page_icon="🏅", layout="wide")
+st.set_page_config(
+    page_title="AthleteX | Sports Performance",
+    page_icon="🏅",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 st.markdown("""
 <style>
 :root {
@@ -28,28 +33,46 @@ st.markdown("""
 
 header[data-testid="stHeader"] {
     background: transparent !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    z-index: 99 !important;
+    pointer-events: none !important;
 }
 
-[data-testid="stToolbar"] {
-    visibility: hidden !important;
-    height: 0 !important;
+/* Hide right-side header chrome (Deploy button, hamburger menu, actions) */
+[data-testid="stAppDeployButton"],
+[data-testid="stToolbarActions"],
+[data-testid="stMainMenu"] {
     display: none !important;
 }
 
-[data-testid="stSidebarCollapsedControl"] {
-    background: #ffffff !important;
+/* Ensure sidebar expand and collapse controls are always visible, accessible, and styled */
+[data-testid="stExpandSidebarButton"],
+[data-testid="stSidebarCollapsedControl"],
+[data-testid="stSidebarCollapseButton"] button {
+    background-color: #ffffff !important;
     border: 1px solid #dce6ed !important;
     border-radius: 8px !important;
     color: #183247 !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06) !important;
-    margin-top: 0.5rem !important;
-    margin-left: 0.5rem !important;
-    z-index: 100 !important;
+    box-shadow: 0 2px 6px rgba(24, 50, 71, 0.08) !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
     visibility: visible !important;
-    display: flex !important;
+    opacity: 1 !important;
+}
+
+[data-testid="stExpandSidebarButton"]:hover,
+[data-testid="stSidebarCollapsedControl"]:hover,
+[data-testid="stSidebarCollapseButton"] button:hover {
+    background-color: #eef7f8 !important;
+    border-color: #087f8c !important;
+    color: #087f8c !important;
+}
+
+[data-testid="stExpandSidebarButton"] svg,
+[data-testid="stSidebarCollapsedControl"] svg,
+[data-testid="stSidebarCollapseButton"] svg {
+    fill: #183247 !important;
+    stroke: #183247 !important;
+    color: #183247 !important;
 }
 
 .stApp {
@@ -86,23 +109,34 @@ p, span, div {
 }
 
 /* 3. Sidebar styling */
-[data-testid="stSidebar"] {
+[data-testid="stSidebar"],
+[data-testid="stSidebarContent"],
+[data-testid="stSidebarUserContent"] {
     background-color: #ffffff !important;
+    color: #183247 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+[data-testid="stSidebar"] {
     border-right: 1px solid #e0e8ee !important;
 }
 [data-testid="stSidebar"] h1,
 [data-testid="stSidebar"] h2,
-[data-testid="stSidebar"] h3 {
+[data-testid="stSidebar"] h3,
+[data-testid="stSidebar"] h4,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] label {
     color: #183247 !important;
+}
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] p,
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] span,
+[data-testid="stSidebar"] .stCaption {
+    color: #5a6e82 !important;
 }
 [data-testid="stSidebar"] [data-testid="stRadio"] label {
     padding: .42rem .55rem;
     border-radius: 9px;
-}
-[data-testid="stSidebar"] [data-testid="stRadio"] label p,
-[data-testid="stSidebar"] [data-testid="stRadio"] label span {
-    color: #183247 !important;
-    font-weight: 500;
 }
 [data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
     background: #eef7f8 !important;
